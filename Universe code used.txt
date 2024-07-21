@@ -1,0 +1,243 @@
+CREATE TABLE galaxy (
+galaxy_id SERIAL PRIMARY KEY,
+name VARCHAR(30) UNIQUE NOT NULL,
+description TEXT,
+age_in_millions_of_years INT,
+distance_from_earth NUMERIC NOT NULL,
+is_spherical BOOLEAN,
+galaxy_type_id INT);
+
+CREATE TABLE star (
+star_id SERIAL PRIMARY KEY,
+name VARCHAR(30) UNIQUE NOT NULL,
+description TEXT,
+age_in_millions_of_years INT,
+distance_from_earth NUMERIC NOT NULL,
+is_spherical BOOLEAN,
+galaxy_id INT);
+
+CREATE TABLE planet (
+planet_id SERIAL PRIMARY KEY,
+name VARCHAR(30) UNIQUE NOT NULL,
+description TEXT,
+age_in_millions_of_years INT,
+distance_from_earth NUMERIC NOT NULL,
+is_spherical BOOLEAN,
+star_id INT);
+
+CREATE TABLE moon (
+moon_id SERIAL PRIMARY KEY,
+name VARCHAR(255) UNIQUE NOT NULL,
+description TEXT,
+age_in_millions_of_years INT,
+distance_from_earth NUMERIC NOT NULL,
+is_spherical BOOLEAN,
+planet_id INT);
+
+CREATE TABLE galaxy_type (
+galaxy_type_id SERIAL PRIMARY KEY,
+name VARCHAR(255) UNIQUE NOT NULL,
+description TEXT NOT NULL);
+
+
+
+('Milky Way', 'The galaxy that contains our Solar System', 13600, 0.0, TRUE),
+('Andromeda', 'The nearest major galaxy to the Milky Way', 10000, 2537000, TRUE),
+('Triangulum', 'A member of the Local Group of galaxies', 10000, 3000000, TRUE),
+('Whirlpool', 'An interacting grand-design spiral galaxy', 4500, 23000000, TRUE),
+('Sombrero', 'A lenticular galaxy in the constellation Virgo', 9000, 29000000, FALSE),
+('Large Magellanic Cloud', 'A satellite galaxy of the Milky Way', 13600, 163000, FALSE);
+
+('Sun', 'The star at the center of our Solar System', 4600, 0.0, TRUE, 'Milky Way'),
+('Proxima Centauri', 'The closest known star to the Sun', 4500, 4.24, TRUE, 'Milky Way'),
+('Betelgeuse', 'A red supergiant star in the constellation Orion', 10000, 642.5, TRUE, 'Milky Way'),
+('Sirius', 'The brightest star in the night sky', 300, 8.6, TRUE, 'Milky Way'),
+('Alpha Centauri A', 'A star in the closest star system to the Solar System', 4500, 4.37, TRUE, 'Milky Way'),
+('Rigel', 'A blue supergiant star in the constellation Orion', 8000, 860, TRUE, 'Milky Way');
+
+('Mercury', 'The smallest and innermost planet in the Solar System', 4500, 77, TRUE, 'Sun'),
+('Venus', 'The second planet from the Sun', 4500, 261, TRUE, 'Sun'),
+('Earth', 'Our home planet, the third planet from the Sun', 4500, 0, TRUE, 'Sun'),
+('Mars', 'The fourth planet from the Sun, known as the Red Planet', 4500, 225, TRUE, 'Sun'),
+('Jupiter', 'The largest planet in the Solar System', 4500, 588, TRUE, 'Sun'),
+('Saturn', 'The sixth planet from the Sun, known for its prominent ring system', 4500, 1200, TRUE, 'Sun'),
+('Alpha Centauri Bb', 'An exoplanet orbiting Alpha Centauri B', 4600, 4.37, TRUE, 'Alpha Centauri A'),
+('Proxima Centauri b', 'An exoplanet orbiting the closest star to the Sun', 4600, 4.24, TRUE, 'Proxima Centauri'),
+('Betelgeuse b', 'A hypothetical planet orbiting Betelgeuse', 10000, 642.5, TRUE, 'Betelgeuse'),
+('Sirius b', 'A hypothetical planet orbiting Sirius', 300, 8.6, TRUE, 'Sirius'),
+('Rigel b', 'A hypothetical planet orbiting Rigel', 8000, 860, TRUE, 'Rigel'),
+('Proxima Centauri c', 'A hypothetical second planet orbiting Proxima Centauri', 4600, 4.24, TRUE, 'Proxima Centauri');
+
+INSERT INTO moon (name, description, age_in_million_years, distance_from_earth, is_spherical, planet) VALUES
+('Moon', 'The only natural satellite of Earth', 4500, 0.384, TRUE, 'Earth'),
+('Phobos', 'The larger and closer of the two moons of Mars', 4500, 225, TRUE, 'Mars'),
+('Deimos', 'The smaller and more distant of the two moons of Mars', 4500, 225, TRUE, 'Mars'),
+('Io', 'The innermost of the four Galilean moons of Jupiter', 4500, 628, TRUE, 'Jupiter'),
+('Europa', 'The smallest of the four Galilean moons of Jupiter', 4500, 628, TRUE, 'Jupiter'),
+('Ganymede', 'The largest moon of Jupiter and the Solar System', 4500, 628, TRUE, 'Jupiter'),
+('Callisto', 'The second-largest moon of Jupiter', 4500, 628, TRUE, 'Jupiter'),
+('Titan', 'The largest moon of Saturn', 4500, 1200, TRUE, 'Saturn'),
+('Enceladus', 'A moon of Saturn known for its icy geysers', 4500, 1200, TRUE, 'Saturn'),
+('Mimas', 'The smallest and innermost of Saturn’s major moons', 4500, 1200, TRUE, 'Saturn'),
+('Triton', 'The largest moon of Neptune', 4500, 4300, TRUE, 'Proxima Centauri b'),
+('Charon', 'The largest moon of Pluto', 4500, 5900, TRUE, 'Alpha Centauri Bb'),
+('Hypothetical Mercury Moon 1', 'A hypothetical moon of Mercury', 4500, 77, TRUE, 'Mercury'),
+('Hypothetical Venus Moon 1', 'A hypothetical moon of Venus', 4500, 261, TRUE, 'Venus'),
+('Hypothetical Betelgeuse Moon 1', 'A hypothetical moon of Betelgeuse b', 10000, 642.5, TRUE, 'Betelgeuse b'),
+('Hypothetical Sirius Moon 1', 'A hypothetical moon of Sirius b', 300, 8.6, TRUE, 'Sirius b'),
+('Hypothetical Rigel Moon 1', 'A hypothetical moon of Rigel b', 8000, 860, TRUE, 'Rigel b'),
+('Hypothetical Proxima Centauri c Moon 1', 'A hypothetical moon of Proxima Centauri c', 4600, 4.24, TRUE, 'Proxima Centauri c'),
+('Hypothetical Proxima Centauri b Moon 1', 'A hypothetical moon of Proxima Centauri b', 4600, 4.24, TRUE, 'Proxima Centauri b'),
+('Hypothetical Alpha Centauri Bb Moon 1', 'A hypothetical moon of Alpha Centauri Bb', 4600, 4.37, TRUE, 'Alpha Centauri Bb');
+
+
+('Spiral', 'A galaxy with a central nucleus and spiral arms', 'Milky Way'),
+('Barred Spiral', 'A spiral galaxy with a central bar-shaped structure', 'Andromeda'),
+('Elliptical', 'A type of galaxy having an ellipsoidal shape and a smooth, nearly featureless brightness profile', 'Triangulum'),
+('Lenticular', 'A galaxy with a central bulge and a disk but no spiral arms', 'Sombrero'),
+('Irregular', 'A galaxy with no regular shape or structure', 'Large Magellanic Cloud'),
+('Dwarf', 'A small galaxy composed of up to several billion stars', 'Milky Way'),
+('Peculiar', 'A galaxy with unusual shape or size, often due to interactions or mergers', 'Whirlpool'),
+('S0', 'A type of lenticular galaxy with a prominent bulge and a disk but no spiral arms', 'Sombrero'),
+('Low Surface Brightness', 'A galaxy with a surface brightness lower than the ambient night sky', 'Large Magellanic Cloud'),
+('Ultra Diffuse', 'A galaxy that is as large as the Milky Way but has very low star density', 'Triangulum');
+
+_____________________
+
+ALTER TABLE galaxy RENAME COLUMN desription TO description;
+ALTER TABLE star RENAME COLUMN desription TO description;
+ALTER TABLE planet RENAME COLUMN desription TO description;
+ALTER TABLE moon RENAME COLUMN desription TO description;
+ALTER TABLE galaxy_type RENAME COLUMN desription TO description;
+
+INSERT INTO galaxy (
+name, description, age_in_millions_of_years, distance_from_earth, is_spherical)
+VALUES
+('Milky Way', 'The galaxy that contains our Solar System', 13600, 0.0, TRUE),
+('Andromeda', 'The nearest major galaxy to the Milky Way', 10000, 2537000, TRUE),
+('Triangulum', 'A member of the Local Group of galaxies', 10000, 3000000, TRUE),
+('Whirlpool', 'An interacting grand-design spiral galaxy', 4500, 23000000, TRUE),
+('Sombrero', 'A lenticular galaxy in the constellation Virgo', 9000, 29000000, FALSE),
+('Large Magellanic Cloud', 'A satellite galaxy of the Milky Way', 13600, 163000, FALSE);
+
+INSERT INTO star (
+name, description, age_in_millions_of_years, distance_from_earth, is_spherical)
+VALUES
+('Sun', 'The star at the center of our Solar System', 4600, 0.0, TRUE),
+('Proxima Centauri', 'The closest known star to the Sun', 4500, 4.24, TRUE),
+('Betelgeuse', 'A red supergiant star in the constellation Orion', 10000, 642.5, TRUE),
+('Sirius', 'The brightest star in the night sky', 300, 8.6, TRUE),
+('Alpha Centauri A', 'A star in the closest star system to the Solar System', 4500, 4.37, TRUE),
+('Rigel', 'A blue supergiant star in the constellation Orion', 8000, 860, TRUE);
+
+INSERT INTO planet (
+name, description, age_in_millions_of_years, distance_from_earth, is_spherical)
+VALUES
+('Mercury', 'The smallest and innermost planet in the Solar System', 4500, 77, TRUE),
+('Venus', 'The second planet from the Sun', 4500, 261, TRUE),
+('Earth', 'Our home planet, the third planet from the Sun', 4500, 0, TRUE),
+('Mars', 'The fourth planet from the Sun, known as the Red Planet', 4500, 225, TRUE),
+('Jupiter', 'The largest planet in the Solar System', 4500, 588, TRUE),
+('Saturn', 'The sixth planet from the Sun, known for its prominent ring system', 4500, 1200, TRUE),
+('Alpha Centauri Bb', 'An exoplanet orbiting Alpha Centauri B', 4600, 4.37, TRUE),
+('Proxima Centauri b', 'An exoplanet orbiting the closest star to the Sun', 4600, 4.24, TRUE),
+('Betelgeuse b', 'A hypothetical planet orbiting Betelgeuse', 10000, 642.5, TRUE),
+('Sirius b', 'A hypothetical planet orbiting Sirius', 300, 8.6, TRUE),
+('Rigel b', 'A hypothetical planet orbiting Rigel', 8000, 860, TRUE),
+('Proxima Centauri c', 'A hypothetical second planet orbiting Proxima Centauri', 4600, 4.24, TRUE);
+
+INSERT INTO moon (
+name, description, age_in_millions_of_years, distance_from_earth, is_spherical)
+VALUES
+('Moon', 'The only natural satellite of Earth', 4500, 0.384, TRUE),
+('Phobos', 'The larger and closer of the two moons of Mars', 4500, 225, TRUE),
+('Deimos', 'The smaller and more distant of the two moons of Mars', 4500, 225, TRUE),
+('Io', 'The innermost of the four Galilean moons of Jupiter', 4500, 628, TRUE),
+('Europa', 'The smallest of the four Galilean moons of Jupiter', 4500, 628, TRUE),
+('Ganymede', 'The largest moon of Jupiter and the Solar System', 4500, 628, TRUE),
+('Callisto', 'The second-largest moon of Jupiter', 4500, 628, TRUE),
+('Titan', 'The largest moon of Saturn', 4500, 1200, TRUE),
+('Enceladus', 'A moon of Saturn known for its icy geysers', 4500, 1200, TRUE),
+('Mimas', 'The smallest and innermost of Saturn’s major moons', 4500, 1200, TRUE),
+('Triton', 'The largest moon of Neptune', 4500, 4300, TRUE),
+('Charon', 'The largest moon of Pluto', 4500, 5900, TRUE),
+('Hypothetical Mercury Moon 1', 'A hypothetical moon of Mercury', 4500, 77, TRUE),
+('Hypothetical Venus Moon 1', 'A hypothetical moon of Venus', 4500, 261, TRUE),
+('Hypothetical Betelgeuse Moon 1', 'A hypothetical moon of Betelgeuse b', 10000, 642.5, TRUE),
+('Hypothetical Sirius Moon 1', 'A hypothetical moon of Sirius b', 300, 8.6, TRUE),
+('Hypothetical Rigel Moon 1', 'A hypothetical moon of Rigel b', 8000, 860, TRUE),
+('Hypothetical Proxima Centauri c Moon 1', 'A hypothetical moon of Proxima Centauri c', 4600, 4.24, TRUE),
+('Hypothetical Proxima Centauri b Moon 1', 'A hypothetical moon of Proxima Centauri b', 4600, 4.24, TRUE),
+('Hypothetical Alpha Centauri Bb Moon 1', 'A hypothetical moon of Alpha Centauri Bb', 4600, 4.37, TRUE);
+
+INSERT INTO galaxy_type (
+name, description)
+VALUES
+('Spiral', 'A galaxy with a central nucleus and spiral arms'),
+('Barred Spiral', 'A spiral galaxy with a central bar-shaped structure'),
+('Elliptical', 'A type of galaxy having an ellipsoidal shape and a smooth, nearly featureless brightness profile'),
+('Lenticular', 'A galaxy with a central bulge and a disk but no spiral arms'),
+('Irregular', 'A galaxy with no regular shape or structure'),
+('Dwarf', 'A small galaxy composed of up to several billion stars'),
+('Peculiar', 'A galaxy with unusual shape or size, often due to interactions or mergers'),
+('S0', 'A type of lenticular galaxy with a prominent bulge and a disk but no spiral arms'),
+('Low Surface Brightness', 'A galaxy with a surface brightness lower than the ambient night sky'),
+('Ultra Diffuse', 'A galaxy that is as large as the Milky Way but has very low star density');
+
+ALTER TABLE galaxy ADD FOREIGN KEY (galaxy_type_id) REFERENCES galaxy_type (galaxy_type_id);
+ALTER TABLE star ADD FOREIGN KEY (galaxy_id) REFERENCES galaxy (galaxy_id);
+ALTER TABLE planet ADD FOREIGN KEY (star_id) REFERENCES star (star_id);
+ALTER TABLE moon ADD FOREIGN KEY (planet_id) REFERENCES planet (planet_id);
+
+--------------
+
+UPDATE galaxy
+SET galaxy_type_id = CASE
+WHEN galaxy_id IN (1) THEN 1
+WHEN galaxy_id IN (2) THEN 2
+WHEN galaxy_id IN (3) THEN 3
+WHEN galaxy_id IN (4) THEN 7
+WHEN galaxy_id IN (5) THEN 8
+WHEN galaxy_id IN (6) THEN 9
+END;
+
+UPDATE star
+SET galaxy_id = CASE
+WHEN star_id IN (1, 2, 3, 4, 5, 6) THEN 1
+END;
+
+UPDATE planet
+SET star_id = CASE
+WHEN planet_id IN (1, 2, 3, 4, 5, 6) THEN 1
+WHEN planet_id IN (8, 12) THEN 2
+WHEN planet_id IN (9) THEN 3
+WHEN planet_id IN (10) THEN 4
+WHEN planet_id IN (7) THEN 5
+WHEN planet_id IN (11) THEN 6
+END;
+
+
+UPDATE moon
+SET planet_id = CASE
+WHEN moon_id IN (12) THEN 1
+WHEN moon_id IN (13) THEN 2
+WHEN moon_id IN (1) THEN 3
+WHEN moon_id IN (2, 3) THEN 4
+WHEN moon_id IN (4, 5, 6, 7) THEN 5
+WHEN moon_id IN (8, 9, 10) THEN 6
+WHEN moon_id IN (20) THEN 7
+WHEN moon_id IN (11, 19) THEN 8
+WHEN moon_id IN (14) THEN 9
+WHEN moon_id IN (15) THEN 10
+WHEN moon_id IN (16, 17) THEN 11
+WHEN moon_id IN (18) THEN 12
+ELSE NULL
+END;
+
+pg_dump -cC --inserts -U freecodecamp universe > universe.sql
+
+
+
+
+
+
